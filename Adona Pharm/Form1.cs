@@ -50,6 +50,7 @@ namespace Adona_Pharm
                 }
             }
         }
+
         private void btnCustomers_Click(object sender, EventArgs e)
         {
             UCOrders uCOrders = new UCOrders();
@@ -97,10 +98,13 @@ namespace Adona_Pharm
                 password = txtPassword.Text;
                 if (txtUserName.Text == "Department Manager" && txtPassword.Text == "d123456")
                 {
+                    lblLoginType.Text = "Department Manager";
+
                     btnCustomers.Visible = true;
                     btnEmployees.Enabled = false;
                     btnOrders.Visible = true;
                     LoginPanel.Visible = false;
+
                     lblLoginType.Text = "Login User: Department Manager";
                     this.Controls.Add(lblLoginType);
                     this.Controls.Add(btnOrders);
@@ -114,10 +118,12 @@ namespace Adona_Pharm
                     password = txtPassword.Text;
                     if (txtUserName.Text == "Shift Manager" && txtPassword.Text == "sm123")
                     {
+                        lblLoginType.Text = "Shift Manager";
                         btnCustomers.Visible = true;
                         btnEmployees.Enabled = false;
                         btnOrders.Visible = true;
                         LoginPanel.Visible = false;
+
                         lblLoginType.Text = "Login User: Shift Manager";
                         this.Controls.Add(lblLoginType);
                         this.Controls.Add(btnOrders);
@@ -129,8 +135,10 @@ namespace Adona_Pharm
                     {
                         userName = txtUserName.Text;
                         password = txtPassword.Text;
-                        if (txtUserName.Text == "Login User: General" && txtPassword.Text == "g123")
+
+                        if (txtUserName.Text == "General" && txtPassword.Text == "g123")
                         {
+                            lblLoginType.Text = "Login User: General";
                             btnCustomers.Enabled = false;
                             btnEmployees.Enabled = false;
                             btnOrders.Visible = true;
@@ -148,10 +156,15 @@ namespace Adona_Pharm
                             txtUserName.Clear();
                             txtPassword.Clear();
                         }
-                    }
-                }
-            }
 
+
+                    }
+
+                }
+
+            }
         }
     }
 }
+
+

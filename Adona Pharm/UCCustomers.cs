@@ -16,8 +16,9 @@ namespace Adona_Pharm
         public UCCustomers()
         {
             InitializeComponent();
-            ShowPanel.Visible = false;
+            AddPanel.Visible = false;
             ShowAllPanel.Visible = false;
+            DeletePanel.Visible = false;
             this.Controls.Add(btnBack);
             if(Form1.userName=="Director"&&Form1.password=="ddd123456")
             {
@@ -46,10 +47,12 @@ namespace Adona_Pharm
 
         private void showCustomerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowPanel.Visible = true;
+            AddPanel.Visible = true;
             ShowAllPanel.Visible = false;
-            ShowPanel.Dock = DockStyle.Fill;
-            this.Controls.Add(ShowPanel);
+            DeletePanel.Visible=false;
+            AddPanel.Dock = DockStyle.Fill;
+            this.Controls.Add(AddPanel);
+
             if (Form1.userName == "Director" && Form1.password == "ddd123456")
             {
                 lblLoginType.Text = "Login User: Director";
@@ -77,8 +80,9 @@ namespace Adona_Pharm
 
         private void showCustomerToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ShowPanel.Visible = false;
+            AddPanel.Visible = false;
             ShowAllPanel.Visible = true;
+            DeletePanel.Visible = false;
             ShowAllPanel.Dock = DockStyle.Fill;
             this.Controls.Add((ShowAllPanel));
             if (Form1.userName == "Director" && Form1.password == "ddd123456")
@@ -104,77 +108,112 @@ namespace Adona_Pharm
                 }
 
             }
+           
         }
 
         private void btnShow_Click(object sender, EventArgs e)
         {
+            Customer customer = new Customer();
             using (var db=new AdonaPharmContext())
             {
-                var getCustomer = db.Customers.Find(int.Parse(txtCustomerId.Text));
-                if (getCustomer == null)
-                {
-                    MessageBox.Show("Invalid Customer Id");
-                }
-                else
-                {
-                    var customerList = db.Customers.Where(w => w.CustomerId == int.Parse(txtCustomerId.Text)).Select(s => new
-                    {
-                        s.CustomerId,
-                        s.FirstName,
-                        s.LastName,
-                        s.Email,
-                        s.City,
-                        s.Address,
-                        s.PhoneNumber,
-                        s.CreditCardNumber,
-                        s.OrderId
-                    }).ToList();
-                    dgvShow.DataSource = customerList;
-                    dgvShow.Dock = DockStyle.Bottom;
-                }
+                db.Customers.Add(customer);
+                db.SaveChanges();
+                MessageBox.Show("Customer Added Successfully");
             }
-            txtCustomerId.Clear();  
+            txtFirstName.Clear();
+            txtLastName.Clear();
+            txtCity.Clear();
+            txtAddress.Clear();
+            txtEmail.Clear();
+            txtCreditCardNumber.Clear();
+            txtOrderId.Clear();
+            txtPhoneNumber.Clear();
         }
 
-        private void btnShowAll_Click(object sender, EventArgs e)
-        {
-            using (var db=new AdonaPharmContext())
-            {
-                var getCustomer = db.Customers.Find(int.Parse(txtShowAll.Text));
-                if (getCustomer == null)
-                {
-                    MessageBox.Show("Invalid Customer Id");
-                }
-                else
-                {
-                    var customerList = db.Customers.Where(w => w.CustomerId == int.Parse(txtShowAll.Text)).Select(s => new
-                    {
-                        s.CustomerId,
-                        s.FirstName,
-                        s.LastName,
-                        s.Email,
-                        s.City,
-                        s.Address,
-                        s.PhoneNumber,
-                        s.CreditCardNumber,
-                        s.Order.OrderId,
-                        s.Order.NumberOfProducts,
-                        s.Order.Price,
-                        s.Order.ResieveDate,
-                        s.Order.NumberOfOrders
-                    }).ToList();
-                    dvgShowAll.DataSource = customerList;
-                    dvgShowAll.Dock = DockStyle.Bottom;
-                }
-            }
-            txtShowAll.Clear();
-        }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             Form1.ActiveForm.Hide();
             var form1 = new Form1();
             form1.Visible = true;
+        }
+
+        private void btnShowAll_Click(object sender, EventArgs e)
+        {
+            using (var db = new AdonaPharmContext())
+            {
+                var customerList = db.Customers.Where(w=>w.CustomerId==int.Parse(txtSCustomerId.Text)).Select(s => new
+                {
+                    s.CustomerId,
+                    s.FirstName,
+                    s.LastName,
+                    s.Email,
+                    s.City,
+                    s.Address,
+                    s.PhoneNumber,
+                    s.CreditCardNumber,
+                    s.Orders,
+                    s.Order.Products,
+                }).ToList();
+                var customerOrders = db.Customers.Where(w => w.Order.CustomerId == w.CustomerId).Select(s => new { s.Order.OrderId, s.Order.Price, s.Order.ReperationDate, s.Order.ResieveDate }).ToList();
+                var orderProducts = db.Products.Where(w => w.OrderId == w.Order.OrderId).Select(s => new { s.ProductName,s.OrderId }).ToList();
+                dvgShowAll.DataSource = customerList;
+                dgvOrders.DataSource = customerOrders;
+                dgvProducts.DataSource = orderProducts;
+                
+            }
+        }
+
+        private void deleteCustomerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddPanel.Visible = false;
+            ShowAllPanel.Visible = false;
+            DeletePanel.Visible = true;
+            DeletePanel.Dock = DockStyle.Fill;
+            this.Controls.Add(DeletePanel);
+
+            if (Form1.userName == "Director" && Form1.password == "ddd123456")
+            {
+                lblLoginType.Text = "Login User: Director";
+            }
+            else
+            {
+                if (Form1.userName == "Department Manager" && Form1.password == "d123456")
+                {
+                    lblLoginType.Text = "Login User: Department Manager";
+                }
+                else
+                {
+                    if (Form1.userName == "Shift Manager" && Form1.password == "sm123")
+                    {
+                        lblLoginType.Text = "Login User: Shift Manager";
+                    }
+                    else
+                    {
+                        lblLoginType.Text = "Login User: General";
+                    }
+                }
+
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var db=new AdonaPharmContext())
+            {
+                var customer = db.Customers.Find(int.Parse(txtDCustomerId.Text));
+                if (customer != null)
+                {
+                    MessageBox.Show("Customer Does not Exist");
+                }
+                else
+                {
+                    db.Customers.Remove(customer);
+                    db.SaveChanges();
+                    MessageBox.Show("Customer Deleted");
+                }
+            }
+            txtDCustomerId.Clear();
         }
     }
 }

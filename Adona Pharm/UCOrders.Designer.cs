@@ -34,6 +34,7 @@
             this.updateOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showOrdersByDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddPanel = new System.Windows.Forms.Panel();
             this.btnBack = new System.Windows.Forms.Button();
             this.lblLoginType = new System.Windows.Forms.Label();
@@ -84,7 +85,6 @@
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.txtCity = new System.Windows.Forms.TextBox();
             this.txtOrderId = new System.Windows.Forms.TextBox();
-            this.dgvAdd = new System.Windows.Forms.DataGridView();
             this.btnAdd = new System.Windows.Forms.Button();
             this.DeletePanel = new System.Windows.Forms.Panel();
             this.label27 = new System.Windows.Forms.Label();
@@ -100,14 +100,24 @@
             this.txtSOrderId = new System.Windows.Forms.TextBox();
             this.dgvShow = new System.Windows.Forms.DataGridView();
             this.label30 = new System.Windows.Forms.Label();
+            this.Showdatepanel = new System.Windows.Forms.Panel();
+            this.dgvDates = new System.Windows.Forms.DataGridView();
+            this.btnShowByDate = new System.Windows.Forms.Button();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.dtpToDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.AddPanel.SuspendLayout();
             this.UpdatePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUpdate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAdd)).BeginInit();
             this.DeletePanel.SuspendLayout();
             this.ShowPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShow)).BeginInit();
+            this.Showdatepanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDates)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -116,7 +126,8 @@
             this.addOrderToolStripMenuItem,
             this.updateOrderToolStripMenuItem,
             this.deleteOrderToolStripMenuItem,
-            this.showOrderToolStripMenuItem});
+            this.showOrderToolStripMenuItem,
+            this.showOrdersByDateToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1625, 24);
@@ -151,6 +162,13 @@
             this.showOrderToolStripMenuItem.Text = "Show Order";
             this.showOrderToolStripMenuItem.Click += new System.EventHandler(this.showOrderToolStripMenuItem_Click);
             // 
+            // showOrdersByDateToolStripMenuItem
+            // 
+            this.showOrdersByDateToolStripMenuItem.Name = "showOrdersByDateToolStripMenuItem";
+            this.showOrdersByDateToolStripMenuItem.Size = new System.Drawing.Size(129, 20);
+            this.showOrdersByDateToolStripMenuItem.Text = "Show Orders By Date";
+            this.showOrdersByDateToolStripMenuItem.Click += new System.EventHandler(this.showOrdersByDateToolStripMenuItem_Click);
+            // 
             // AddPanel
             // 
             this.AddPanel.BackColor = System.Drawing.Color.Silver;
@@ -179,7 +197,6 @@
             this.AddPanel.Controls.Add(this.txtAddress);
             this.AddPanel.Controls.Add(this.txtCity);
             this.AddPanel.Controls.Add(this.txtOrderId);
-            this.AddPanel.Controls.Add(this.dgvAdd);
             this.AddPanel.Controls.Add(this.btnAdd);
             this.AddPanel.Location = new System.Drawing.Point(12, 50);
             this.AddPanel.Name = "AddPanel";
@@ -188,7 +205,7 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(739, 589);
+            this.btnBack.Location = new System.Drawing.Point(720, 502);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 23);
             this.btnBack.TabIndex = 25;
@@ -626,15 +643,6 @@
             this.txtOrderId.Size = new System.Drawing.Size(100, 23);
             this.txtOrderId.TabIndex = 2;
             // 
-            // dgvAdd
-            // 
-            this.dgvAdd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAdd.Location = new System.Drawing.Point(4, 407);
-            this.dgvAdd.Name = "dgvAdd";
-            this.dgvAdd.RowTemplate.Height = 25;
-            this.dgvAdd.Size = new System.Drawing.Size(404, 78);
-            this.dgvAdd.TabIndex = 1;
-            // 
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(114, 361);
@@ -793,11 +801,102 @@
             this.label30.TabIndex = 22;
             this.label30.Text = "label5";
             // 
+            // Showdatepanel
+            // 
+            this.Showdatepanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Showdatepanel.BackgroundImage")));
+            this.Showdatepanel.Controls.Add(this.dgvDates);
+            this.Showdatepanel.Controls.Add(this.btnShowByDate);
+            this.Showdatepanel.Controls.Add(this.label33);
+            this.Showdatepanel.Controls.Add(this.label34);
+            this.Showdatepanel.Controls.Add(this.dtpToDate);
+            this.Showdatepanel.Controls.Add(this.dtpFromDate);
+            this.Showdatepanel.Controls.Add(this.label32);
+            this.Showdatepanel.Controls.Add(this.label31);
+            this.Showdatepanel.Location = new System.Drawing.Point(895, 31);
+            this.Showdatepanel.Name = "Showdatepanel";
+            this.Showdatepanel.Size = new System.Drawing.Size(362, 363);
+            this.Showdatepanel.TabIndex = 23;
+            // 
+            // dgvDates
+            // 
+            this.dgvDates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDates.Location = new System.Drawing.Point(77, 207);
+            this.dgvDates.Name = "dgvDates";
+            this.dgvDates.RowTemplate.Height = 25;
+            this.dgvDates.Size = new System.Drawing.Size(240, 150);
+            this.dgvDates.TabIndex = 35;
+            // 
+            // btnShowByDate
+            // 
+            this.btnShowByDate.Location = new System.Drawing.Point(131, 183);
+            this.btnShowByDate.Name = "btnShowByDate";
+            this.btnShowByDate.Size = new System.Drawing.Size(75, 23);
+            this.btnShowByDate.TabIndex = 34;
+            this.btnShowByDate.Text = "Show";
+            this.btnShowByDate.UseVisualStyleBackColor = true;
+            this.btnShowByDate.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(20, 149);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(43, 15);
+            this.label33.TabIndex = 33;
+            this.label33.Text = "ToDate";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(20, 122);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(59, 15);
+            this.label34.TabIndex = 32;
+            this.label34.Text = "FromDate";
+            // 
+            // dtpToDate
+            // 
+            this.dtpToDate.Location = new System.Drawing.Point(131, 143);
+            this.dtpToDate.Name = "dtpToDate";
+            this.dtpToDate.Size = new System.Drawing.Size(200, 23);
+            this.dtpToDate.TabIndex = 31;
+            // 
+            // dtpFromDate
+            // 
+            this.dtpFromDate.Location = new System.Drawing.Point(131, 114);
+            this.dtpFromDate.Name = "dtpFromDate";
+            this.dtpFromDate.Size = new System.Drawing.Size(200, 23);
+            this.dtpFromDate.TabIndex = 30;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.BackColor = System.Drawing.Color.Gainsboro;
+            this.label32.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label32.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label32.Location = new System.Drawing.Point(297, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(65, 28);
+            this.label32.TabIndex = 29;
+            this.label32.Text = "label5";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.BackColor = System.Drawing.SystemColors.Info;
+            this.label31.Font = new System.Drawing.Font("Brush Script MT", 24F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label31.Location = new System.Drawing.Point(53, 19);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(166, 39);
+            this.label31.TabIndex = 20;
+            this.label31.Text = "Adona Pharm";
+            // 
             // UCOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.Controls.Add(this.Showdatepanel);
             this.Controls.Add(this.label30);
             this.Controls.Add(this.ShowPanel);
             this.Controls.Add(this.DeletePanel);
@@ -812,12 +911,14 @@
             this.UpdatePanel.ResumeLayout(false);
             this.UpdatePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUpdate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAdd)).EndInit();
             this.DeletePanel.ResumeLayout(false);
             this.DeletePanel.PerformLayout();
             this.ShowPanel.ResumeLayout(false);
             this.ShowPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShow)).EndInit();
+            this.Showdatepanel.ResumeLayout(false);
+            this.Showdatepanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDates)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -831,7 +932,6 @@
         private System.Windows.Forms.ToolStripMenuItem deleteOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showOrderToolStripMenuItem;
         private System.Windows.Forms.Panel AddPanel;
-        private System.Windows.Forms.DataGridView dgvAdd;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtAddress;
@@ -896,5 +996,15 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.ToolStripMenuItem showOrdersByDateToolStripMenuItem;
+        private System.Windows.Forms.Panel Showdatepanel;
+        private System.Windows.Forms.Button btnShowByDate;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.DateTimePicker dtpToDate;
+        private System.Windows.Forms.DateTimePicker dtpFromDate;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.DataGridView dgvDates;
     }
 }

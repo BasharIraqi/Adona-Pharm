@@ -206,7 +206,7 @@
             this.AddEmployeePanel.Controls.Add(this.label3);
             this.AddEmployeePanel.Controls.Add(this.label2);
             this.AddEmployeePanel.Controls.Add(this.label17);
-            this.AddEmployeePanel.Location = new System.Drawing.Point(12, 27);
+            this.AddEmployeePanel.Location = new System.Drawing.Point(3, 27);
             this.AddEmployeePanel.Name = "AddEmployeePanel";
             this.AddEmployeePanel.Size = new System.Drawing.Size(387, 583);
             this.AddEmployeePanel.TabIndex = 1;
@@ -894,9 +894,9 @@
             this.ShowEmployeePanel.Controls.Add(this.label36);
             this.ShowEmployeePanel.Controls.Add(this.txtEmployeeId);
             this.ShowEmployeePanel.Controls.Add(this.btnShow);
-            this.ShowEmployeePanel.Location = new System.Drawing.Point(886, 273);
+            this.ShowEmployeePanel.Location = new System.Drawing.Point(930, 243);
             this.ShowEmployeePanel.Name = "ShowEmployeePanel";
-            this.ShowEmployeePanel.Size = new System.Drawing.Size(560, 297);
+            this.ShowEmployeePanel.Size = new System.Drawing.Size(560, 327);
             this.ShowEmployeePanel.TabIndex = 37;
             // 
             // label39
@@ -916,7 +916,7 @@
             this.dgvShow.BackgroundColor = System.Drawing.Color.DarkSlateBlue;
             this.dgvShow.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvShow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvShow.Location = new System.Drawing.Point(311, 144);
+            this.dgvShow.Location = new System.Drawing.Point(156, 172);
             this.dgvShow.Name = "dgvShow";
             this.dgvShow.RowTemplate.Height = 25;
             this.dgvShow.Size = new System.Drawing.Size(240, 150);
@@ -973,7 +973,7 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(750, 600);
+            this.btnBack.Location = new System.Drawing.Point(720, 502);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 23);
             this.btnBack.TabIndex = 39;

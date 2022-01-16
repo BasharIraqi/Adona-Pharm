@@ -20,6 +20,7 @@ namespace Adona_Pharm
             UpdatePanel.Visible = false;
             DeletePanel.Visible = false;
             ShowPanel.Visible = false;
+            Showdatepanel.Visible = false;
             this.Controls.Add(btnBack);
             if (Form1.userName == "Director" && Form1.password == "ddd123456")
             {
@@ -307,6 +308,60 @@ namespace Adona_Pharm
             var form1 = new Form1();
             form1.Visible = true;
         }
+
+        private void showOrdersByDateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddPanel.Visible = false;
+            UpdatePanel.Visible = false;
+            DeletePanel.Visible = false;
+            ShowPanel.Visible = false;
+            Showdatepanel.Visible = true;
+            Showdatepanel.Dock = DockStyle.Fill;
+            this.Controls.Add(Showdatepanel);
+            if (Form1.userName == "Director" && Form1.password == "ddd123456")
+            {
+                label28.Text = "Login User: Director";
+            }
+            else
+            {
+                if (Form1.userName == "Department Manager" && Form1.password == "d123456")
+                {
+                    label28.Text = "Login User: Department Manager";
+                }
+                else
+                {
+                    if (Form1.userName == "Shift Manager" && Form1.password == "sm123")
+                    {
+                        label28.Text = "Login User: Shift Manager";
+                    }
+                    else
+                    {
+                        label28.Text = "Login User: General";
+                    }
+                }
+
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dtpFromDate.Value > dtpToDate.Value)
+            {
+                MessageBox.Show("inccorect dates");
+            }
+            else
+            {
+                using (var db = new AdonaPharmContext())
+                {
+                    var save=db.Orders.Where(w=>w.ReperationDate>= dtpFromDate.Value && w.ResieveDate<=dtpToDate.Value).Select(s=>new { s.OrderId,s.City,s.ReperationDate,s.ResieveDate
+                    ,s.Address,s.NumberOfProducts,s.NumberOfOrders,s.Price,s.CustomerId,s.EmployeeId}).ToList();
+
+                    dgvDates.DataSource = save;
+                    dgvDates.Dock = DockStyle.Bottom;
+                }
+            }
+        }
+
     }
     
 }
