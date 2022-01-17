@@ -152,11 +152,11 @@ namespace Adona_Pharm
                     s.Address,
                     s.PhoneNumber,
                     s.CreditCardNumber,
-                    s.Orders,
-                    s.Order.Products,
+                    s.Order.NumberOfOrders,
+                    s.OrderId
                 }).ToList();
-                var customerOrders = db.Customers.Where(w => w.Order.CustomerId == w.CustomerId).Select(s => new { s.Order.OrderId, s.Order.Price, s.Order.ReperationDate, s.Order.ResieveDate }).ToList();
-                var orderProducts = db.Products.Where(w => w.OrderId == w.Order.OrderId).Select(s => new { s.ProductName,s.OrderId }).ToList();
+                var customerOrders = db.Orders.Where(w => w.CustomerId==customerList[0].CustomerId).Select(s => new { s.OrderId, s.Price, s.ReperationDate, s.ResieveDate,s.NumberOfProducts }).ToList();
+                var orderProducts = db.Products.Where(w => customerList[0].OrderId==w.OrderId ).Select(s => new { s.ProductName,s.OrderId }).ToList();
                 dvgShowAll.DataSource = customerList;
                 dgvOrders.DataSource = customerOrders;
                 dgvProducts.DataSource = orderProducts;
