@@ -152,7 +152,6 @@ namespace Adona_Pharm
                     s.Address,
                     s.PhoneNumber,
                     s.CreditCardNumber,
-                    s.Order.NumberOfOrders,
                     s.OrderId
                 }).ToList();
                 var customerOrders = db.Orders.Where(w => w.CustomerId==customerList[0].CustomerId).Select(s => new { s.OrderId, s.Price, s.ReperationDate, s.ResieveDate,s.NumberOfProducts }).ToList();
